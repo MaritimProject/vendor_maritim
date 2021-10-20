@@ -15,6 +15,9 @@
 # limitations under the License.
 #
 
+# maritim. GSI
+TARGET_NO_KERNEL_OVERRIDE := true
+
 # maritim. version
 include vendor/maritim/config/maritim_version.mk
 
