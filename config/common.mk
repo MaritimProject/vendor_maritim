@@ -15,30 +15,20 @@
 # limitations under the License.
 #
 
-# xd. version
-include vendor/xdroid/config/xd_version.mk
+# maritim. version
+include vendor/maritim/config/maritim_version.mk
 
-# xd. packages
-include vendor/xdroid/config/xd_packages.mk
+# maritim. packages
+include vendor/maritim/config/maritim_packages.mk
 
-# xd. props
-include vendor/xdroid/config/xd_props.mk
+# maritim. props
+include vendor/maritim/config/maritim_props.mk
 
-# xd. permissions
+# maritim. permissions
 PRODUCT_COPY_FILES += \
-    vendor/xdroid/config/permissions/xd_permissions.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/xd_permissions_system.xml \
-    vendor/xdroid/config/permissions/xd_permissions.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/xd_permissions_system-ext.xml \
-    vendor/xdroid/config/permissions/xd_permissions.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/xd_permissions_product.xml
-
-# xd. xdroidUI
-include vendor/xdroidui/config.mk
-
-# xd. GMS
-include vendor/google/gms/config.mk
-TARGET_SUPPORTS_GOOGLE_RECORDER ?= false
-TARGET_INCLUDE_STOCK_ARCORE ?= false
-TARGET_INCLUDE_LIVE_WALLPAPERS ?= false
-TARGET_SUPPORTS_QUICK_TAP ?= true
+    vendor/maritim/config/permissions/xd_permissions.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/xd_permissions_system.xml \
+    vendor/maritim/config/permissions/xd_permissions.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/xd_permissions_system-ext.xml \
+    vendor/maritim/config/permissions/xd_permissions.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/xd_permissions_product.xml
 
 # ART
 # Optimize everything for preopt
@@ -51,28 +41,28 @@ endif
 
 # Backup Tool
 PRODUCT_COPY_FILES += \
-    vendor/xdroid/prebuilt/common/bin/backuptool.sh:install/bin/backuptool.sh \
-    vendor/xdroid/prebuilt/common/bin/backuptool.functions:install/bin/backuptool.functions \
-    vendor/xdroid/prebuilt/common/bin/50-xdroid.sh:$(TARGET_COPY_OUT_SYSTEM)/addon.d/50-xdroid.sh
+    vendor/maritim/prebuilt/common/bin/backuptool.sh:install/bin/backuptool.sh \
+    vendor/maritim/prebuilt/common/bin/backuptool.functions:install/bin/backuptool.functions \
+    vendor/maritim/prebuilt/common/bin/50-maritim.sh:$(TARGET_COPY_OUT_SYSTEM)/addon.d/50-maritim.sh
 
 ifneq ($(strip $(AB_OTA_PARTITIONS) $(AB_OTA_POSTINSTALL_CONFIG)),)
 PRODUCT_COPY_FILES += \
-    vendor/xdroid/prebuilt/common/bin/backuptool_ab.sh:$(TARGET_COPY_OUT_SYSTEM)/bin/backuptool_ab.sh \
-    vendor/xdroid/prebuilt/common/bin/backuptool_ab.functions:$(TARGET_COPY_OUT_SYSTEM)/bin/backuptool_ab.functions \
-    vendor/xdroid/prebuilt/common/bin/backuptool_postinstall.sh:$(TARGET_COPY_OUT_SYSTEM)/bin/backuptool_postinstall.sh
+    vendor/maritim/prebuilt/common/bin/backuptool_ab.sh:$(TARGET_COPY_OUT_SYSTEM)/bin/backuptool_ab.sh \
+    vendor/maritim/prebuilt/common/bin/backuptool_ab.functions:$(TARGET_COPY_OUT_SYSTEM)/bin/backuptool_ab.functions \
+    vendor/maritim/prebuilt/common/bin/backuptool_postinstall.sh:$(TARGET_COPY_OUT_SYSTEM)/bin/backuptool_postinstall.sh
 endif
 
 # Backup Services whitelist
 PRODUCT_COPY_FILES += \
-    vendor/xdroid/config/permissions/backup.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/backup.xml
+    vendor/maritim/config/permissions/backup.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/backup.xml
 
-# Copy all xdroid-specific init rc files
-$(foreach f,$(wildcard vendor/xdroid/prebuilt/common/etc/init/*.rc),\
+# Copy all maritim-specific init rc files
+$(foreach f,$(wildcard vendor/maritim/prebuilt/common/etc/init/*.rc),\
 	$(eval PRODUCT_COPY_FILES += $(f):$(TARGET_COPY_OUT_SYSTEM)/etc/init/$(notdir $f)))
 
 # Enable Android Beam on all targets
 PRODUCT_COPY_FILES += \
-    vendor/xdroid/config/permissions/android.software.nfc.beam.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.software.nfc.beam.xml
+    vendor/maritim/config/permissions/android.software.nfc.beam.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.software.nfc.beam.xml
 
 # Enable SIP+VoIP on all targets
 PRODUCT_COPY_FILES += \
@@ -93,12 +83,12 @@ PRODUCT_MINIMIZE_JAVA_DEBUG_INFO := true
 # Disable vendor restrictions
 PRODUCT_RESTRICT_VENDOR_FILES := false
 
-PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += vendor/xdroid/overlay
-DEVICE_PACKAGE_OVERLAYS += vendor/xdroid/overlay/common
+PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += vendor/maritim/overlay
+DEVICE_PACKAGE_OVERLAYS += vendor/maritim/overlay/common
 
 # Sensitive Phone Numbers list
 PRODUCT_COPY_FILES += \
-    vendor/xdroid/prebuilt/common/etc/sensitive_pn.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sensitive_pn.xml
+    vendor/maritim/prebuilt/common/etc/sensitive_pn.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sensitive_pn.xml
 
 # Use default filter for problematic apps.
 PRODUCT_DEXPREOPT_QUICKEN_APPS += \
@@ -108,15 +98,15 @@ PRODUCT_DEXPREOPT_QUICKEN_APPS += \
 DONT_DEXPREOPT_PREBUILTS := true
 
 # Include Lineage LatinIME dictionaries
-PRODUCT_PACKAGE_OVERLAYS += vendor/xdroid/overlay/dictionaries
+PRODUCT_PACKAGE_OVERLAYS += vendor/maritim/overlay/dictionaries
 
 # Disable EAP Proxy because it depends on proprietary headers
 # and breaks WPA Supplicant compilation.
 DISABLE_EAP_PROXY := true
 
 # init.rc
-$(foreach f,$(wildcard vendor/xdroid/prebuilt/etc/init/*.rc),\
+$(foreach f,$(wildcard vendor/maritim/prebuilt/etc/init/*.rc),\
     $(eval PRODUCT_COPY_FILES += $(f):$(TARGET_COPY_OUT_SYSTEM)/etc/init/$(notdir $f)))
 
 # Include AOSP audio files
-include vendor/xdroid/config/aosp_audio.mk
+include vendor/maritim/config/aosp_audio.mk

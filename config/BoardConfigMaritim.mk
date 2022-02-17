@@ -1,10 +1,10 @@
-include vendor/xdroid/config/BoardConfigKernel.mk
+include vendor/maritim/config/BoardConfigKernel.mk
 
 ifeq ($(BOARD_USES_QCOM_HARDWARE),true)
-include vendor/xdroid/config/BoardConfigQcom.mk
+include vendor/maritim/config/BoardConfigQcom.mk
 endif
 
-include vendor/xdroid/config/BoardConfigSoong.mk
+include vendor/maritim/config/BoardConfigSoong.mk
 
 # Namespace for fwk-detect
 TARGET_FWK_DETECT_PATH ?= hardware/qcom-caf/common
